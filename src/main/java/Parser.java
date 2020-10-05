@@ -44,7 +44,7 @@ public class Parser {
                 int h = date.get(Calendar.HOUR_OF_DAY);
                 int m = date.get(Calendar.MINUTE);
 
-                if (h<8) {
+                if (h<8) { // если время мньше 8 утра, выходим из таймера
                     timer.cancel();
                 } else {
 
@@ -94,17 +94,17 @@ public class Parser {
         Calendar call= Calendar.getInstance();
         int h = call.get(Calendar.HOUR_OF_DAY);
         int m = call.get(Calendar.MINUTE);
-        System.out.println("Сейчас "+call.getTime().toString());
+        System.out.println("Сейчас "+call.getTime().toString()); // запрашиаем актуальную дату
 
-        if (h<8) {call.set(Calendar.HOUR_OF_DAY, 8);
+        if (h<8) {call.set(Calendar.HOUR_OF_DAY, 8);// если время меньше 8 утра, настраиваем час сробатывания
         }
-        if (m%15>5) {call.add(Calendar.MINUTE, (16-m%15));
-        } else { call.add(Calendar.SECOND, 10);
+        if (m%15>5) {call.add(Calendar.MINUTE, (16-m%15));// измерения проводятся каждую четверть часа. Если с начала четверти прошло более 5 минут, ждем следующю четверть
+        } else { call.add(Calendar.SECOND, 10); // иначе добовляем 10 секунд
         }
 
         System.out.println("Время первого опроса"+call.getTime().toString());
 
-        timer.scheduleAtFixedRate(task, call.getTime(), 900000);
+        timer.scheduleAtFixedRate(task, call.getTime(), 900000); 
 
 
 
